@@ -111,3 +111,46 @@ def get_total_maintenance_amount():
 	"route_options": {"from_date": "2023-05-23"},
 	"route": ["query-report", "Permitted Documents For User"]
 }	
+
+
+def on_workflow_action(doc,method):
+	recipient= frappe.get_single('App Settings').email_recipient
+	if not recipient:
+		frappe.throw("Please set Email Recipient in App Settings")
+	if doc.has_value_changed('workflow_state'):
+		
+		message=""
+		subject=""
+		send_mail=False
+		if doc.workflow_state == 'Scheduled':
+			message=f'Maintenance for Machine {doc.machine_name} has been Scheduled.'
+			subject='Maintenance Scheduled'
+			send_mail=True
+		if doc.workflow_state == 'Completed':
+			message=f'Maintenance for Machine {doc.machine_name} has been Completed.'
+			subject='Maintenance Completed'
+			send_mail=True
+
+		if doc.workflow_state == 'Closed':
+			message=f'Maintenance for Machine {doc.machine_name} has been Closed.'
+			subject='Maintenance Closed'
+			send_mail=True
+		if send_mail:
+		
+			frappe.sendmail(
+				recipients=recipient,  # or get from doc
+				subject=subject,
+				message=message,
+				reference_doctype=doc.doctype,
+				reference_name=doc.name
+			)
+	if doc.has_value_changed('status') and doc.status=='Overdue':
+		message=f'Maintenance for Machine {doc.machine_name} is Overdue.'
+		subject='Maintenance Overdue'
+		frappe.sendmail(
+				recipients=recipient,  # or get from doc
+				subject=subject,
+				message=message,
+				reference_doctype=doc.doctype,
+				reference_name=doc.name
+			)		

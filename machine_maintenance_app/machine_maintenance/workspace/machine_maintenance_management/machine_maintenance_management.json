@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"bZHanWUPr9\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Machine Maintenance Management</span>\",\"col\":12}},{\"id\":\"Ese1YTjDDH\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Machine Maintenance\",\"col\":3}},{\"id\":\"arFJeC7Dc5\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"QtI2IwUJVv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Machine Maintenance Report\",\"col\":3}},{\"id\":\"DOULEXNoTN\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"sCjsIasH0G\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}}]",
+ "content": "[{\"id\":\"bZHanWUPr9\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Machine Maintenance Management</span>\",\"col\":12}},{\"id\":\"Ese1YTjDDH\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Machine Maintenance\",\"col\":3}},{\"id\":\"V3cFlva2md\",\"type\":\"card\",\"data\":{\"card_name\":\"App Settings\",\"col\":4}},{\"id\":\"arFJeC7Dc5\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"QtI2IwUJVv\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Machine Maintenance Report\",\"col\":3}},{\"id\":\"DOULEXNoTN\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"sCjsIasH0G\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}}]",
  "creation": "2025-11-15 09:02:35.590391",
  "custom_blocks": [],
  "docstatus": 0,
@@ -12,8 +12,28 @@
  "indicator_color": "green",
  "is_hidden": 0,
  "label": "Machine Maintenance Management",
- "links": [],
- "modified": "2025-11-15 12:37:58.671666",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "App Settings",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "App Settings",
+   "link_count": 0,
+   "link_to": "App Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-11-15 17:39:01.720227",
  "modified_by": "Administrator",
  "module": "Machine Maintenance",
  "name": "Machine Maintenance Management",
