@@ -4,10 +4,9 @@
 import frappe
 from frappe.model.document import Document
 from frappe.desk.notifications import notify_mentions
-from frappe.utils import cstr, now,flt,nowdate
+from frappe.utils import cstr, now,flt,nowdate,get_first_day, get_last_day, nowdate
 from erpnext.setup.utils import get_exchange_rate
 import frappe.utils
-
 class MachineMaintenance(Document):
 	@frappe.whitelist()
 	def add_note(self, note):
@@ -76,3 +75,30 @@ def create_journal_entry(doc, method=None):
 		frappe.log_error(message=frappe.get_traceback(), title='Machine Maintenance: Journal Entry Failed')
 		frappe.throw(('Failed to create Journal Entry: {0}').format(e))
 
+
+@frappe.whitelist()
+def get_total_maintenance_amount():
+	company = frappe.db.get_value('Company', frappe.defaults.get_defaults().company, 'name')
+	company_currency = frappe.get_cached_value('Company', company, 'default_currency') 
+	total_cost = 0
+	start_date = get_first_day(nowdate())  
+	end_date   = get_last_day(nowdate())    
+
+	maintenance_list = frappe.get_all(
+	"Machine Maintenance",
+	filters={
+		"docstatus": 1,
+		"maintenance_date": ["between", [start_date, end_date]]
+	},
+	fields=["cost", "currency", "maintenance_date"]
+	)	
+	for maintenance in maintenance_list:
+		exchange_rate=get_exchange_rate(maintenance.currency, company_currency, maintenance.maintenance_date)
+		total_cost += maintenance.cost*exchange_rate if exchange_rate else maintenance.cost
+
+	return {
+	"value":total_cost,
+	"fieldtype": "Currency",
+	"route_options": {"from_date": "2023-05-23"},
+	"route": ["query-report", "Permitted Documents For User"]
+}	

@@ -12,7 +12,8 @@
  "is_public": 0,
  "is_standard": 1,
  "label": "Total Maintenance",
- "modified": "2025-11-15 13:03:34.553138",
+ "method": "machine_maintenance_app.machine_maintenance.doctype.machine_maintenance.machine_maintenance.get_total_maintenance_amount",
+ "modified": "2025-11-15 15:11:28.947533",
  "modified_by": "Administrator",
  "module": "Machine Maintenance",
  "name": "Total Maintenance",
@@ -21,5 +22,5 @@
  "report_function": "Sum",
  "show_percentage_stats": 1,
  "stats_time_interval": "Daily",
- "type": "Document Type"
+ "type": "Custom"
 }

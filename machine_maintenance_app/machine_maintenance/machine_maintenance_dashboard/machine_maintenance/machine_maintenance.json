@@ -5,12 +5,12 @@
   },
   {
    "card": "Overdue Maintenance Tasks"
+  },
+  {
+   "card": "Total Maintenance"
   }
  ],
  "charts": [
-  {
-   "width": "Half"
-  },
   {
    "chart": "Status distribution",
    "width": "Half"
@@ -27,7 +27,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2025-11-15 13:06:58.876995",
+ "modified": "2025-11-15 15:00:36.358828",
  "modified_by": "Administrator",
  "module": "Machine Maintenance",
  "name": "Machine Maintenance",

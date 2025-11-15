@@ -86,12 +86,14 @@
    "default": "INR",
    "fieldname": "currency",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Currency",
    "options": "Currency"
   },
   {
    "fieldname": "cost",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Cost",
    "options": "currency",
    "precision": "2",
@@ -123,7 +125,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-11-15 14:45:17.463314",
+ "modified": "2025-11-15 15:09:07.504079",
  "modified_by": "Administrator",
  "module": "Machine Maintenance",
  "name": "Machine Maintenance",
