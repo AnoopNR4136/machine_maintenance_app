@@ -9,6 +9,7 @@ frappe.ui.form.on("Machine Maintenance", {
         }
     },
     refresh(frm) {
+
         // Hide notes section based on status
         if (!['Draft', 'Scheduled'].includes(cur_frm.doc.status)) {
             frm.trigger("show_notes")
@@ -16,6 +17,17 @@ frappe.ui.form.on("Machine Maintenance", {
         } else {
             frm.set_df_property('notes', 'hidden', true);
 
+        }
+
+        // auto-update status to Overdue if maintenance_date < today
+        if (frm.doc.status !== 'Completed' && frm.doc.maintenance_date) {
+            var today = frappe.datetime.get_today();
+            if (frm.doc.maintenance_date < today) {
+                if (frm.doc.status !== 'Overdue') {
+                    frm.set_value('status', 'Overdue');
+                    frm.save();
+                }
+            }
         }
     },
     show_notes(frm) {
