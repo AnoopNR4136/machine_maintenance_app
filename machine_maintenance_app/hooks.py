@@ -137,13 +137,13 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+"Machine Maintenance": {
+# "validate": "maintenance.module.machine_maintenance.validate_technician",
+"on_submit": "machine_maintenance_app.machine_maintenance.doctype.machine_maintenance.machine_maintenance.create_journal_entry",
+# "on_change": "maintenance.module.machine_maintenance.on_status_change_notifications"
+}
+}
 
 # Scheduled Tasks
 # ---------------

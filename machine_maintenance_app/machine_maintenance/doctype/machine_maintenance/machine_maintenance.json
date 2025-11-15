@@ -94,7 +94,8 @@
    "fieldtype": "Currency",
    "label": "Cost",
    "options": "currency",
-   "precision": "2"
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_svhl",
@@ -104,7 +105,8 @@
    "fieldname": "parts_used",
    "fieldtype": "Table",
    "label": "Parts Used",
-   "options": "Parts Used"
+   "options": "Parts Used",
+   "reqd": 1
   },
   {
    "fieldname": "amended_from",
@@ -121,7 +123,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-11-15 13:39:35.395063",
+ "modified": "2025-11-15 14:45:17.463314",
  "modified_by": "Administrator",
  "module": "Machine Maintenance",
  "name": "Machine Maintenance",
