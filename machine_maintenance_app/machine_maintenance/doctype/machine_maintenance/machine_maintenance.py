@@ -61,10 +61,6 @@ def create_journal_entry(doc, method=None):
     - Calculates amount based on exchange rate if needed.
     - Builds debit and credit line items.
     - Creates and submits the Journal Entry document.
-
-    Error Handling:
-    - Logs full traceback on failure.
-    - Throws a user-friendly error if Journal Entry creation fails.
     """
 
 	if not doc.technician:
@@ -127,13 +123,6 @@ def get_total_maintenance_amount():
     - Converts each maintenance cost to company currency using the exchange rate
       of its maintenance date.
     - Sums up all converted costs.
-
-    Returns:
-    - A dictionary containing:
-        - value: Total cost in company currency
-        - fieldtype: Currency (for UI rendering)
-        - route_options: Predefined route parameters
-        - route: Destination report route
     """
 	company = frappe.db.get_value('Company', frappe.defaults.get_defaults().company, 'name')
 	company_currency = frappe.get_cached_value('Company', company, 'default_currency') 
@@ -176,11 +165,6 @@ def on_workflow_action(doc,method):
     Status-Based Notification:
     - Triggered when 'status' changes to 'Overdue'.
     - Sends "Maintenance Overdue" notification.
-
-    Additional Notes:
-    - Email recipient is retrieved from App Settings.
-    - Throws a validation error if recipient is not configured.
-    - Uses frappe.sendmail with reference_doctype and reference_name for traceability.
     """
 	recipient= frappe.get_single('App Settings').email_recipient
 	if not recipient:
