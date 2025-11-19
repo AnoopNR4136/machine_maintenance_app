@@ -153,9 +153,9 @@ fixtures =[
     {
         "dt": "Workflow Action",
     },
-    {
-        "dt": "Email Account",
-    },
+    # {
+    #     "dt": "Email Account",
+    # },
     {
         "dt":"Role",
         'filters': [["name", "in", ["Technician"]]]
