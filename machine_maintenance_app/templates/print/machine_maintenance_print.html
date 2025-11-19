@@ -1,0 +1,72 @@
+<h2>Machine Maintenance Report</h2>
+
+{# Create namespace to store totals #}
+{% set ns = namespace(grand_total=0) %}
+
+{# Group data by machine #}
+{% set grouped = {} %}
+{% for row in data %}
+{% set machine = row.machine %}
+{% if not grouped.get(machine) %}
+{% set _ = grouped.update({ machine: [] }) %}
+{% endif %}
+{% set _ = grouped[machine].append(row) %}
+{% endfor %}
+
+{% for machine, rows in grouped.items() %}
+
+<h3 style="background:#f2f2f2;padding:6px;">Machine: {{ machine }}</h3>
+
+<table border="1" cellspacing="0" cellpadding="6" width="100%">
+    <thead>
+        <tr>
+            {% if not consolidated %}
+            <th>#</th>
+            <th>Date</th>
+            <th>Technician</th>
+            <th>Status</th>
+            {% endif %}
+            <th style="text-align:right;">Total Cost</th>
+        </tr>
+    </thead>
+
+    {% set group = namespace(total=0) %}
+
+    <tbody>
+        {% for r in rows %}
+        <tr>
+            {% if not consolidated %}
+            <td>{{ loop.index }}</td>
+            <td>{{ r.maintenance_date }}</td>
+            <td>{{ r.technician }}</td>
+            <td>{{ r.status }}</td>
+            {% endif %}
+            <td style="text-align:right;">{{ "{:,.2f}".format(r.total_cost | float) }}</td>
+        </tr>
+
+        {# ACCUMULATE using namespace #}
+        {% set group.total = group.total + (r.total_cost | float) %}
+        {% endfor %}
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="{{ 4 if not consolidated else 1 }}" style="text-align:right;">
+                <b>Group Total</b>
+            </td>
+            <td style="text-align:right;">
+                <b>{{ "{:,.2f}".format(group.total) }}</b>
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<br>
+
+{# Add to grand total #}
+{% set ns.grand_total = ns.grand_total + group.total %}
+{% endfor %}
+
+<h2 style="text-align:right;">
+    Grand Total: {{ "{:,.2f}".format(ns.grand_total) }}
+</h2>

@@ -1,8 +1,7 @@
 # Copyright (c) 2025, Anoop and contributors
 # For license information, please see license.txt
 
-import frappe
-
+import frappe, json
 
 def execute(filters=None):
 	if not filters:
@@ -78,3 +77,17 @@ def condition_gen(filters):
 		conditions += " AND maintenance_date BETWEEN %(from_date)s AND %(to_date)s"
 
 	return conditions
+
+@frappe.whitelist()
+def get_pdf(data,consolidated=False):
+	data = json.loads(data)
+	consolidated = int(consolidated) if consolidated else 0
+
+	html = frappe.render_template(
+		"machine_maintenance_app/templates/print/machine_maintenance_print.html",
+		{
+			"data": data,
+			"consolidated": consolidated
+		}
+	)
+	return html
